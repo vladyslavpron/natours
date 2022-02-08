@@ -4,7 +4,6 @@ const User = require('./../models/userModel');
 const Booking = require('./../models/bookingModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
-const User = require('../models/userModel');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the curently booked tour
@@ -70,7 +69,7 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
-  if ((event.type = 'checkout.session.completed'))
+  if (event.type === 'checkout.session.completed')
     createBookingCheckout(event.data.object);
 
   res.status(200).json({ recieved: true });
