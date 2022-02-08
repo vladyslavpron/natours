@@ -1,9 +1,7 @@
 /* eslint-disable */
 import axios from 'axios';
 import { showAlert } from './alerts';
-const stripe = Stripe(
-  'pk_test_51KPaGEDlJevs8mse9LEBtbrjGEYBgltYyz5JMAv5WCjJA7G8P3uEKyOOnwZMfM5IUr3TVFX6X3mQHpvhljbVkaNM00XAOdZvgA'
-);
+const stripe = Stripe('pk_test_BUkd0ZXAj6m0q0jMyRgBxNns00PPtgvjjr');
 
 export const bookTour = async tourId => {
   try {
@@ -11,7 +9,7 @@ export const bookTour = async tourId => {
     const session = await axios(`/api/v1/bookings/checkout-session/${tourId}`);
     // console.log(session);
 
-    // 2) Create checkout form + charge credit card
+    // 2) Create checkout form + chanre credit card
     await stripe.redirectToCheckout({
       sessionId: session.data.session.id
     });

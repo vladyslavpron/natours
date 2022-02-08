@@ -25,8 +25,8 @@ exports.uploadTourImages = upload.fields([
   { name: 'images', maxCount: 3 }
 ]);
 
-// upload.single('image'); req.file
-// upload.array('images',5) req.files
+// upload.single('image') req.file
+// upload.array('images', 5) req.files
 
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
   if (!req.files.imageCover || !req.files.images) return next();
@@ -41,6 +41,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 
   // 2) Images
   req.body.images = [];
+
   await Promise.all(
     req.files.images.map(async (file, i) => {
       const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
